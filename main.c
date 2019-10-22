@@ -1,15 +1,42 @@
-//
-//  main.c
-//  blip
-//
-//  Created by s20181102934 on 2019/10/22.
-//  Copyright © 2019 win. All rights reserved.
-//
-
 #include <stdio.h>
+#include <stdlib.h>
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    printf("Hello, World!\n");
+#define MAXSIZE 10
+#define NotFound 0
+typedef int ElementType;
+
+typedef int Position;
+typedef struct LNode *List;
+struct LNode {
+    ElementType Data[MAXSIZE];
+    Position Last; /* 保存线性表中最后一个元素的位置 */
+};
+
+List ReadInput(); /* 裁判实现，细节不表。元素从下标1开始存储 */
+Position BinarySearch( List L, ElementType X ){
+    int i=1;
+    
+    while (L->Data[i]!=X||i>L->Last) {
+        i++;
+    }
+    if (L->Data[i]==X) {
+        return i;
+    }
+    else{
+        return NotFound;
+    }
+}
+
+int main()
+{
+    List L;
+    ElementType X;
+    Position P;
+    
+    L = ReadInput();
+    scanf("%d", &X);
+    P = BinarySearch( L, X );
+    printf("%d\n", P);
+    
     return 0;
 }
